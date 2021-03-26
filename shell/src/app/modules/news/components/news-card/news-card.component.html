@@ -1,0 +1,24 @@
+<div style="margin: 20px;">
+  <h3>News Table</h3>
+<div style=" display: flex;flex-direction: row;flex-wrap: wrap;">
+<mat-card class="example-card" *ngFor="let result of (newsResponse$|async)?.results">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{result.display_title}}</mat-card-title>
+    <mat-card-subtitle>{{result.mpaa_rating?result.mpaa_rating:"Not Rated"}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="result.multimedia.src" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      {{result.summary_short}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="accent">LIKE</button>
+    <button mat-raised-button color="warn">SHARE</button>
+  </mat-card-actions>
+</mat-card>
+</div>
+
+
+</div>
