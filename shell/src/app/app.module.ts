@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
+import { createCustomElement } from '@angular/elements';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,16 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  //bootstrap: [AppComponent]
+  entryComponents:[AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+     constructor(private injector: Injector) {
+    }
+
+  ngDoBootstrap() {
+        const elm = createCustomElement(AppComponent, { injector: this.injector });
+        customElements.define('shell-app', elm);
+    }
+}
